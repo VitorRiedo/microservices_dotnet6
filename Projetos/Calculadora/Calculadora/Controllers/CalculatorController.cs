@@ -28,6 +28,45 @@ namespace Calculadora.Controllers
             return BadRequest("Invalid Input");
         }
 
+        [HttpGet("div/{firstNumber}/{secondNumber}")]
+        public IActionResult Div(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var div = ConvertoDecimal(firstNumber) / ConvertoDecimal(secondNumber);
+
+                return Ok(div.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("Mul/{firstNumber}/{secondNumber}")]
+        public IActionResult Mul(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var Mul = ConvertoDecimal(firstNumber) * ConvertoDecimal(secondNumber);
+
+                return Ok(Mul.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("Pow/{firstNumber}/{secondNumber}")]
+        public IActionResult Pow(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var Pow = Math.Pow(ConvertoDecimal(firstNumber), ConvertoDecimal(secondNumber));
+
+                return Ok(Pow.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+
         private double ConvertoDecimal(string Number)
         {
             double result = 0;
