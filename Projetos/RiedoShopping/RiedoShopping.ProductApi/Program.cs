@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RiedoShopping.ProductApi.Config;
 using RiedoShopping.ProductApi.Model.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PostgresContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+
+builder.Services.AddSingleton(MappingConfig.RegisterMaps().CreateMapper());
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
